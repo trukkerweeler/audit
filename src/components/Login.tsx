@@ -2,16 +2,18 @@
 import React, { useState } from 'react';
 import {trpc } from '../utils/trpc';
 import useCookie from '@/utils/useCookie';
+import setUser from './User';
 
 const Login: React.FC = () => {
   const [cookie, setCookie] = useCookie('user');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [user, setUser] = useState('Login');
 
   const loginQuery = trpc.login.useQuery({username: username, password: password});
   if (cookie) {
     const user = JSON.parse(cookie);
-    console.log(user);
+    // console.log({user});
   }
 
 
@@ -20,11 +22,15 @@ const Login: React.FC = () => {
     console.log({loggedInUser});
 
     if (loggedInUser) {
-      console.log('logged in');
+      // console.log('logged in');
       setCookie(JSON.stringify(loggedInUser));
+      console.log(loggedInUser.username);
+      setUser(loggedInUser.username)
       // redirect to home page
       // window.location.href = '/';
-      // window.location.reload();
+      window.location.reload();
+
+
     } else {
         alert('Invalid username or password');
       }
@@ -63,7 +69,7 @@ const Login: React.FC = () => {
         <button
           type="button"
           onClick={handleLogin}
-          className="bg-blue text-white p-2 rounded-md hover:bg-blue-600"
+          className="bg-blue-500 text-white p-2 rounded-md"
         >
           Login
         </button>

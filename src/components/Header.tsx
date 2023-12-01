@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '/public/images/audit.png'
+import User from './User';
 
 const Header: React.FC = () => {
+  // const [user, setUser] = useState('Login');
+  
   return (
     <>
     <header className="flex items-center justify-between p-4 border-b-4">
@@ -25,8 +28,9 @@ const Header: React.FC = () => {
           <li><Link href="/checklist" className="p-4">Checklists</Link></li>
           <li><Link href="/audit" className="p-4">Audits</Link></li>
           <li><Link href="/history" className="p-4">History</Link></li>
-          <li><Link href="/login" className="p-4">Login</Link></li>
+          <li><Link href="/login" className="p-4"><User /></Link></li>
         </ul>
+        
       </nav>
     </header>
     </>
