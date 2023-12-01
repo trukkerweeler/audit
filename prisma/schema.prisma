@@ -32,11 +32,23 @@ model Checklist {
 }
 
 model Results {
-  @id       Int    @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   auditid   Int
   clid      Int
   result    String
   passfail  String
   corrid    Int
   flup      String
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  fName     String
+  lName     String
+  username  String
+  seller    String?  @default("") // Example default value for a string field
+  admin     String?  @default("") // Example default value for a string field
+  story     String?  @default("") // Example default value for a string field
+  password  String
+  rating    Int?     @default(0)  // Example default value for an integer field
 }
