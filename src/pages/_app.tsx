@@ -9,7 +9,7 @@ function getBaseUrl() {
   if (typeof window === 'undefined') {
     return process.env.VERCEL_URL
       ? `https://${process.env.VERCEL_URL}/api/trpc`
-      : `http://localhost:3001/api/trpc`
+      : `http://localhost:3000/api/trpc`
   }
   return '/api/trpc'
 }
