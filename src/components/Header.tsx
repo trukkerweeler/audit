@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '/public/images/audit.png'
-import User from './User';
+// import User from './User';
+import { UserContext } from '@/context/user';
+
 
 const Header: React.FC = () => {
-  // const [user, setUser] = useState('Login');
+  const {user, setUser} = useContext(UserContext);
   
   return (
     <>
@@ -28,7 +30,8 @@ const Header: React.FC = () => {
           <li><Link href="/checklist" className="p-4">Checklists</Link></li>
           <li><Link href="/audit" className="p-4">Audits</Link></li>
           <li><Link href="/history" className="p-4">History</Link></li>
-          <li><Link href="/login" className="p-4"><User /></Link></li>
+          {!user && <li><Link href="/register" className="p-4">Register</Link></li>}
+          <li><Link href="/login" className="p-4">{user ? user.username : "Login"}</Link></li>
         </ul>
         
       </nav>

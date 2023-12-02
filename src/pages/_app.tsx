@@ -1,9 +1,10 @@
 import '@/styles/globals.css'
 import '@fontsource/poppins'
-import type { AppType } from 'next/app';
+import type { AppProps } from 'next/app';
 import type { ServerRouter } from '@/server/router'
 import { createTRPCNext } from '@trpc/next';
 import { httpBatchLink } from '@trpc/client';
+import App from '../components/App';
 
 function getBaseUrl() {
   if (typeof window === 'undefined') {
@@ -26,8 +27,13 @@ const { withTRPC } = createTRPCNext<ServerRouter>({
   ssr: true,
 });
 
-const App: AppType = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+  <App>
+    <Component {...pageProps} />
+  </App>
+  );
+
 }
 
-export default withTRPC(App);
+export default withTRPC(MyApp);

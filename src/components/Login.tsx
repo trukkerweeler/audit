@@ -1,14 +1,15 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {trpc } from '../utils/trpc';
 import useCookie from '@/utils/useCookie';
-import setUser from './User';
+import { UserContext } from '@/context/user';
+import Link from 'next/link';
 
 const Login: React.FC = () => {
+  const {user, setUser} = useContext(UserContext);
   const [cookie, setCookie] = useCookie('user');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState('Login');
 
   const loginQuery = trpc.login.useQuery({username: username, password: password});
   if (cookie) {
@@ -19,16 +20,16 @@ const Login: React.FC = () => {
 
   const handleLogin = async () => {
     const loggedInUser = await loginQuery.data;
-    console.log({loggedInUser});
+    // console.log({loggedInUser});
 
     if (loggedInUser) {
-      // console.log('logged in');
+      console.log('logged in');
       setCookie(JSON.stringify(loggedInUser));
       console.log(loggedInUser.username);
-      setUser(loggedInUser.username)
+      setUser(loggedInUser)
       // redirect to home page
-      // window.location.href = '/';
-      window.location.reload();
+      window.location.href = '/';
+      // window.location.reload();
 
 
     } else {
@@ -73,6 +74,10 @@ const Login: React.FC = () => {
         >
           Login
         </button>
+        <Link href="/register"
+          className="ml-4 text-blue-500">
+          Register
+        </Link>
       </form>
     </div>
   );
