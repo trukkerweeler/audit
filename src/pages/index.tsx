@@ -2,9 +2,16 @@ import React, { useContext } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Link from 'next/link';
+import { UserContext } from '@/context/user';
 
 
 export default function Home() {
+    
+    // pass in user context
+    const {user, setUser} = useContext(UserContext);
+    // console.log({user});
+    
+    
     return (
         <>
         <Header/>

@@ -1,15 +1,17 @@
 "use client"
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {trpc } from '../utils/trpc';
 import useCookie from '@/utils/useCookie';
 import { UserContext } from '@/context/user';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const Login: React.FC = () => {
   const {user, setUser} = useContext(UserContext);
   const [cookie, setCookie] = useCookie('user');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
   const loginQuery = trpc.login.useQuery({username: username, password: password});
   if (cookie) {
@@ -27,9 +29,10 @@ const Login: React.FC = () => {
       setCookie(JSON.stringify(loggedInUser));
       console.log(loggedInUser.username);
       setUser(loggedInUser)
-      // redirect to home page
-      window.location.href = '/';
-      // window.location.reload();
+      // perform client-side redirect
+      router.push('/');
+
+
 
 
     } else {

@@ -18,6 +18,21 @@
       return ctx.prisma.user.findMany();
       }
     ),
+
+
+    // post image blob to database
+    insertImage: publicProcedure
+      .input(z.object({
+        image: z.string(),
+      }))
+      .mutation(({ input, ctx }: {input: {image: string}, ctx: Context}) => {
+        return ctx.prisma.image.create({
+          data: {
+            image: input.image,
+          },
+        });
+      }
+      ),
   
     // /////all the products:
     // findAllProducts: publicProcedure
