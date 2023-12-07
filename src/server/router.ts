@@ -34,6 +34,17 @@
       }
       ),
   
+
+/////all the audits:
+    findAllAudits: publicProcedure
+      .query(({ ctx  }: {ctx:Context}) => {
+        // console.log("find all audits")
+        // console.log(ctx.prisma.audit.findMany())
+      return ctx.prisma.audit.findMany();
+      }
+    ),
+
+
     // /////all the products:
     // findAllProducts: publicProcedure
     //   .query(({ ctx  }: {ctx:Context}) => {
