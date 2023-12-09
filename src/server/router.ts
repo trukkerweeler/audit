@@ -20,38 +20,59 @@
     ),
 
 
-    // post image blob to database
-    insertImage: publicProcedure
+  //all the audits:
+  findAllAudits: publicProcedure
+    .query(({ ctx  }: {ctx:Context}) => {
+      // console.log("find all audits")
+      // console.log(ctx.prisma.audit.findMany())
+      return ctx.prisma.audit.findMany();
+    }
+    ),
+    
+    /////all the products:
+    findAllProducts: publicProcedure
+      .query(({ ctx  }: {ctx:Context}) => {
+      return ctx.prisma.product.findMany();
+      }
+    ),
+    
+  insertAudit: publicProcedure
+    .input(z.object({
+      title: z.string(),
+      qmsref: z.string(),
+    }))
+    .mutation(({ input, ctx }: {input: {title: string, qmsref: string}, ctx: Context}) => {
+      return ctx.prisma.audit.create({
+        data: {
+          title: input.title,
+          qmsref: input.qmsref,
+          active: true,
+          rev: '1',
+        },
+      });
+    }
+    ),
+    
+    
+    insertUser: publicProcedure
       .input(z.object({
-        image: z.string(),
+        fName: z.string(),
+        lName: z.string(),
+        username: z.string(),
+        password: z.string(),
       }))
-      .mutation(({ input, ctx }: {input: {image: string}, ctx: Context}) => {
-        return ctx.prisma.image.create({
+      .mutation(({ input, ctx }: {input: {fName: string, lName: string, username: string, password: string}, ctx: Context}) => {
+        return ctx.prisma.user.create({
           data: {
-            image: input.image,
+            fName: input.fName,
+            lName: input.lName,
+            username: input.username,
+            password: input.password,
           },
         });
       }
       ),
-  
-
-/////all the audits:
-    findAllAudits: publicProcedure
-      .query(({ ctx  }: {ctx:Context}) => {
-        // console.log("find all audits")
-        // console.log(ctx.prisma.audit.findMany())
-      return ctx.prisma.audit.findMany();
-      }
-    ),
-
-
-    // /////all the products:
-    // findAllProducts: publicProcedure
-    //   .query(({ ctx  }: {ctx:Context}) => {
-    //   return ctx.prisma.product.findMany();
-    //   }
-    // ),
-  
+    
   
   //     /////find product reviews by ID: 
   //   findProductReviews: publicProcedure
@@ -147,24 +168,6 @@
   //   }),
       
       
-    insertUser: publicProcedure
-      .input(z.object({
-        fName: z.string(),
-        lName: z.string(),
-        username: z.string(),
-        password: z.string(),
-      }))
-      .mutation(({ input, ctx }: {input: {fName: string, lName: string, username: string, password: string}, ctx: Context}) => {
-        return ctx.prisma.user.create({
-          data: {
-            fName: input.fName,
-            lName: input.lName,
-            username: input.username,
-            password: input.password,
-          },
-        });
-      }
-      ),
   
     login: publicProcedure
       .input(z.object({
@@ -184,21 +187,21 @@
   
   
   
-    //   insertOne: publicProcedure
-    //     .input(z.object({
-    //         title: z.string(),
-    //         description: z.string(),
-    //         imagePath: z.string(),
-    //         price: z.number(),
+      insertOne: publicProcedure
+        .input(z.object({
+            title: z.string(),
+            description: z.string(),
+            imagePath: z.string(),
+            price: z.number(),
   
-    //       })
-    //     )
-    //     .mutation(({ input, ctx }: {input: {title: string, description: string, imagePath: string, price: number}, ctx: Context}) => {
-    //       return ctx.prisma.product.create({
-    //         data: { title: input.title },
-    //       });
-    //     }
-    //   ),
+          })
+        )
+        .mutation(({ input, ctx }: {input: {title: string, description: string, imagePath: string, price: number}, ctx: Context}) => {
+          return ctx.prisma.product.create({
+            data: { title: input.title },
+          });
+        }
+      ),
     //   updateOne: publicProcedure
     //     .input(z.object({
     //         id: z.number(),
@@ -214,18 +217,18 @@
     //       });
     //     }
     //   ),
-    //   deleteAll: publicProcedure
-    //     .input(z.object({
-    //         ids: z.number().array(),
-    //     }))
-    //     .mutation(({ input, ctx }) => {
-    //       const { ids } = input;
+      deleteAudit: publicProcedure
+        .input(z.object({
+            id: z.number(),
+        }))
+        .mutation(({ input, ctx }) => {
+          const { id } = input;
   
-    //       return ctx.prisma.product.deleteMany({
-    //         where: { id: { in: ids } },
-    //       });
-    //     }
-    //   ),
+          return ctx.prisma.audit.deleteMany({
+            where: { id: id },
+          });
+        }
+      ),
   
   
   

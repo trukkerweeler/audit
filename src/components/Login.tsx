@@ -32,9 +32,6 @@ const Login: React.FC = () => {
       // perform client-side redirect
       router.push('/');
 
-
-
-
     } else {
         alert('Invalid username or password');
       }
