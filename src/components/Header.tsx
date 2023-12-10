@@ -31,6 +31,8 @@ const Header: React.FC = () => {
           <li><Link href="/audit" className="p-4">Audits</Link></li>
           <li><Link href="/history" className="p-4">History</Link></li>
           {!user && <li><Link href="/register" className="p-4">Register</Link></li>}
+          {user && <li><Link href="/logout" className="p-4">Logout</Link></li>}
+
           <li><Link href="/login" className="p-4">{user ? user.username : "Login"}</Link></li>
         </ul>
         

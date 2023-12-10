@@ -1,13 +1,11 @@
 import React from 'react'
 import Layout from '@/components/Layout'
 import Hero from '@/components/Hero'
-import { useRouter } from 'next/router'
 import { trpc } from '@/utils/trpc';
 import AuditHolder from '@/components/AuditHolder';
 import Link from 'next/link';
 
 const Audit: React.FC = () => {
-  const router = useRouter()
   const { data: auditList } = trpc.findAllAudits.useQuery();
   
   return (

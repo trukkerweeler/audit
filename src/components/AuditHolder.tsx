@@ -1,6 +1,6 @@
-
-import React, { useState } from 'react';
+import React, { useRef, useContext } from 'react';
 import { trpc } from '@/utils/trpc';
+import { UserContext } from '@/context/user';
 
 
 interface AuditHolderProps {
@@ -16,7 +16,8 @@ interface AuditHolderProps {
 }
 
 const AuditHolder: React.FC<AuditHolderProps> = ({ auditList }) => {
-    const [id, setId] = useState('');
+    // const { id, setId } = useRef();
+    const { user, setUser } = useContext(UserContext);
 
     
     const handleAuditDeleteConfirm = () => {
@@ -43,7 +44,7 @@ const AuditHolder: React.FC<AuditHolderProps> = ({ auditList }) => {
     );
     
     const handleAuditDelete = async (id: number) => {
-        // const dialog = document.querySelector('dialog');
+        const dialog = document.querySelector('dialog');
         console.log( 'id: ', id);
         try {
             await auditMutation.mutateAsync({
@@ -53,10 +54,13 @@ const AuditHolder: React.FC<AuditHolderProps> = ({ auditList }) => {
         } catch (error) {
             console.error(error);
         }
-        // if (!dialog) {
-        //     return;
-        // }
-        // dialog.close();
+        if (!dialog) {
+            return;
+        }
+        dialog.close();
+        // refresh page
+        window.location.reload();
+        // router.push('/audit');
     };
 
     const handleAuditDeleteCancel = () => {
@@ -78,12 +82,11 @@ const AuditHolder: React.FC<AuditHolderProps> = ({ auditList }) => {
                     <p className='mx-2 row-start-3'>QMS Ref: {qmsref}</p>
                     {/* <p className='mx-2'>Active: {active}</p>
                     <p className='mx-2'>Revision: {rev}</p> */}
-                    
-                    <button onClick={() => handleAuditDelete(id)} type='button' className='bg-red-500 text-white w-24 rounded row-span-3 place-self-end'>Delete</button>
-                    {/* Create dialog to confirm deletion of selected record */}
+                    {user && <button onClick={handleAuditDeleteConfirm} type='button' value={id} className='bg-red-500 text-white w-24 rounded row-span-3 place-self-end'>Delete</button>
+                    }
                     <dialog className='border-2 border-black rounded-md'>
                         <p>Are you sure you want to delete this record?</p>
-                        <button className='bg-red-500 text-white w-24 rounded'>Yes</button>
+                        <button onClick={() => handleAuditDelete(id)} className='bg-red-500 text-white w-24 rounded'>Yes</button>
                         <button onClick={handleAuditDeleteCancel} className='bg-green-500 text-white w-24 rounded'>No</button>
                         <button onClick={handleAuditDeleteCancel} className='bg-blue-500 text-white w-24 rounded'>Cancel</button>
                     </dialog>

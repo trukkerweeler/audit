@@ -11,6 +11,13 @@
   const publicProcedure = t.procedure; 
   
   export const serverRouter = router({
+    
+    /////all the checklists:
+    findAllChecklists: publicProcedure
+      .query(({ ctx  }: {ctx:Context}) => {
+      return ctx.prisma.checklist.findMany();
+      }
+    ),
   
     /////all the users:
     findAllUsers: publicProcedure
@@ -29,12 +36,6 @@
     }
     ),
     
-    /////all the products:
-    findAllProducts: publicProcedure
-      .query(({ ctx  }: {ctx:Context}) => {
-      return ctx.prisma.product.findMany();
-      }
-    ),
     
   insertAudit: publicProcedure
     .input(z.object({

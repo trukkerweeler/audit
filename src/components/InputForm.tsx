@@ -1,12 +1,14 @@
 
 import React, { useState } from 'react';
 import { trpc } from '@/utils/trpc';
+import { useRouter } from 'next/router';
 
 
 
 const AddAudit: React.FC = () => {
   const [title, setTitle] = useState('');
   const [qmsref, setQmsref] = useState('');
+  const router = useRouter();
   
 
  const auditMutation = trpc.insertAudit.useMutation({
