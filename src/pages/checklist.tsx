@@ -7,14 +7,14 @@ import Checklist from '@/components/Checklist';
 const ChecklistView: React.FC = () => {
 
   const { data: auditList } = trpc.findAllAudits.useQuery();
-  // const { data: checklistList } = trpc.findAllChecklists.useQuery();
+  const { data: checklistList } = trpc.findAllChecklists.useQuery();
 
   return (
     <Layout>
       <Hero title="Checklists"/>
       <section>
 
-      {auditList && <Checklist auditList={auditList} />}
+      {auditList && <Checklist auditList={auditList} checklistList={checklistList} />}
       </section>
       {/* <section className='grid border-solid border-black-400 border-2 bg-gray-100'>
         <h2 className='row-start-1 grid-cols-1'>Audit Checklists</h2>

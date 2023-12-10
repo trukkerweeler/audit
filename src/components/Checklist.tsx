@@ -10,12 +10,28 @@ interface AuditHolderProps {
     active?: boolean;
     rev?: string;
   }[];
+  checklistList: {
+    id: number;
+    auditid: number;
+    sql: number
+    cltext: string;
+    process: string;
+}[];
 }
 
+// interface ChecklistHolderProps {
+//     checklistList: {
+//         id: number;
+//         auditid: number;
+//         sql: number
+//         cltext: string;
+//         process: string;
+//     }[];
+// }
 
-
-const ChecklistPicker: React.FC<AuditHolderProps> = ({ auditList }) => {
+const ChecklistPicker: React.FC<AuditHolderProps> = ({ auditList, checklistList }) => {
     const [selectedCategory, setSelectedCategory] = useState('');
+
 
     return (
         <>
@@ -40,6 +56,15 @@ const ChecklistPicker: React.FC<AuditHolderProps> = ({ auditList }) => {
                     </div>
                 ))}
 
+            </div>
+            <div>
+                <h2>Checklist Detail</h2>
+                {checklistList.filter((checklist) => checklist.auditid === Number(selectedCategory)).map((checklist) => (
+                    <div key={checklist.id}>
+                        <p>{checklist.cltext}</p>
+                        <p>{checklist.process}</p>
+                    </div>
+                ))}
             </div>
         </>
         
