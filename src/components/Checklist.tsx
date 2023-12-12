@@ -58,10 +58,10 @@ const ChecklistPicker: React.FC<AuditHolderProps> = ({ auditList, checklistList 
 
             </div>
             <div>
-                <h2>Checklist Detail</h2>
+                <h2 className="text-red-500" >Checklist Detail</h2>
                 {checklistList.filter((checklist) => checklist.auditid === Number(selectedCategory)).map((checklist) => (
-                    <div key={checklist.id}>
-                        <p>{checklist.cltext}</p>
+                    <div key={checklist.id} className="border-solid border-black border-2">
+                        <p className="text-red-500">{checklist.cltext}</p>
                         <p>{checklist.process}</p>
                     </div>
                 ))}

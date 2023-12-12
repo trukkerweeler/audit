@@ -5,6 +5,7 @@ import useCookie from '@/utils/useCookie';
 import { UserContext } from '@/context/user';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import bcrypt from 'bcryptjs';
 
 const Login: React.FC = () => {
   const {user, setUser} = useContext(UserContext);
@@ -25,9 +26,11 @@ const Login: React.FC = () => {
     // console.log({loggedInUser});
 
     if (loggedInUser) {
+      // let salt = bcrypt.genSaltSync(10);
+      // let hash = bcrypt.hashSync(loggedInUser.password, salt);
       console.log('logged in');
       setCookie(JSON.stringify(loggedInUser));
-      console.log(loggedInUser.username);
+      // console.log(loggedInUser.username);
       setUser(loggedInUser)
       // perform client-side redirect
       router.push('/');
