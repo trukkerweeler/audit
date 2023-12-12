@@ -73,12 +73,12 @@ const Login: React.FC = () => {
         <button
           type="button"
           onClick={handleLogin}
-          className="bg-blue-500 text-white p-2 rounded-md"
+          className="text-sm left-0 top-0 bg-slate-200 mt-1 ml-1.5 rounded-xl border-green-500 border-solid border-2 px-1 min-w-[120px] h-16"
         >
           Login
         </button>
         <Link href="/register"
-          className="ml-4 text-blue-500">
+          className="ml-4 text-green-500">
           Register
         </Link>
       </form>

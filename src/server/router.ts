@@ -18,6 +18,41 @@
       return ctx.prisma.checklist.findMany();
       }
     ),
+
+    // insert checklist line item
+    insertChecklist: publicProcedure
+      .input(z.object({
+        auditid: z.number(),
+        sql: z.number(),
+        cltext: z.string(),
+        process: z.string(),
+      }))
+      .mutation(({ input, ctx }: {input: {auditid: number, sql: number, cltext: string, process: string}, ctx: Context}) => {
+        return ctx.prisma.checklist.create({
+          data: {
+            auditid: input.auditid,
+            sql: input.sql,
+            cltext: input.cltext,
+            process: input.process,
+          },
+        });
+      }
+      ),
+
+    // delete checklist line item
+    deleteChecklist: publicProcedure
+    .input(z.object({
+      id: z.number(),
+    }))
+    .mutation(({ input, ctx }) => {
+      const { id } = input;
+
+      return ctx.prisma.checklist.deleteMany({
+        where: { id: id },
+      });
+    }
+  ),
+
   
     /////all the users:
     findAllUsers: publicProcedure
@@ -188,21 +223,21 @@
   
   
   
-      insertOne: publicProcedure
-        .input(z.object({
-            title: z.string(),
-            description: z.string(),
-            imagePath: z.string(),
-            price: z.number(),
+      // insertOne: publicProcedure
+      //   .input(z.object({
+      //       title: z.string(),
+      //       description: z.string(),
+      //       imagePath: z.string(),
+      //       price: z.number(),
   
-          })
-        )
-        .mutation(({ input, ctx }: {input: {title: string, description: string, imagePath: string, price: number}, ctx: Context}) => {
-          return ctx.prisma.product.create({
-            data: { title: input.title },
-          });
-        }
-      ),
+      //     })
+      //   )
+      //   .mutation(({ input, ctx }: {input: {title: string, description: string, imagePath: string, price: number}, ctx: Context}) => {
+      //     return ctx.prisma.product.create({
+      //       data: { title: input.title },
+      //     });
+      //   }
+      // ),
     //   updateOne: publicProcedure
     //     .input(z.object({
     //         id: z.number(),

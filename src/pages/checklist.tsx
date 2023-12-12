@@ -13,8 +13,8 @@ const ChecklistView: React.FC = () => {
     <Layout>
       <Hero title="Checklists"/>
       <section>
-
-      {auditList && <Checklist auditList={auditList} checklistList={checklistList} />}
+      
+      {auditList && <Checklist auditList={auditList.map(audit => ({ ...audit, rev: audit.rev || undefined }))} checklistList={checklistList || []} />}
       </section>
       
     </Layout>

@@ -8,8 +8,7 @@ import { useRouter } from 'next/router';
 const AddAudit: React.FC = () => {
   const [title, setTitle] = useState('');
   const [qmsref, setQmsref] = useState('');
-  const router = useRouter();
-  
+  const router = useRouter();  
 
  const auditMutation = trpc.insertAudit.useMutation({
   onSuccess: () => {
@@ -39,14 +38,14 @@ const AddAudit: React.FC = () => {
       {/* <h2>Add Audit</h2> */}
       <form className='grid grid-cols-3 gap-4 mr-4 my-4'>
         <label className='text-right'>
-          Title:
+          title:
           </label>        
           <input
             type="text"
             name="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className='rounded border-2 border-green-500 col-span-2 px-2'
+            className='rounded border-2 border-slate col-span-2 px-2'
           />
         
         <label className='text-right'>
@@ -57,10 +56,11 @@ const AddAudit: React.FC = () => {
             name="qmsref"
             value={qmsref}
             onChange={(e) => setQmsref(e.target.value)}
-            className='rounded border-2 border-green-500 col-span-2 px-2'
+            className='rounded border-2 border-slate col-span-2 px-2'
           />
         <br />
-        <button onClick={handleSubmit} type="button" className='bg-blue-500 text-white p-2 rounded-md'>Submit</button>
+        <button onClick={handleSubmit} type="button" className="text-sm left-0 top-0 bg-slate-200 mt-1 ml-1.5 rounded-xl border-green-500 border-solid border-2 px-1 min-w-[120px] h-16"
+			>Add Audit</button>
       </form>
     </div>
   );

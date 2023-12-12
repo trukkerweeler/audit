@@ -11,14 +11,14 @@ const Audit: React.FC = () => {
   return (
     <Layout>
       <Hero title="Audits"/>
-      <section className='grid border-solid border-black-400 border-2 bg-gray-100'>
+      {/* <section className='grid border-solid border-black-400 border-2 bg-gray-100'>
         <h2 className='row-start-1 grid-cols-1'>Add Audit</h2>
           <Link href='/addaudit' className='row-start-1 grid-cols-2'>
             <button className='border-solid border-green-400 border-2 w-48 mx-auto'>
               Add
             </button>
           </Link>
-      </section>
+      </section> */}
       <section>
         {auditList && <AuditHolder auditList={auditList} />}
       </section>

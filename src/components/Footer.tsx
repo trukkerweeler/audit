@@ -3,11 +3,11 @@ import Link from 'next/link';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-black text-white p-8">
+    <footer className="bg-black text-white p-8 mt-1">
       <div className="container mx-auto flex justify-between max-w-[800px]">
 				{/* Column 1 */}
 				<div className="flex flex-col">
-					<h2 className="text-lg font-bold mb-2">Shop</h2>
+					<h2 className="text-lg font-bold mb-2">Modules</h2>
 					<Link href="/checklist" passHref><p className="cursor-pointer">Checklists</p></Link>
 					<Link href="/audit" passHref><p className="cursor-pointer">Audits</p></Link>
 					<Link href="/history" passHref><p className="cursor-pointer">History</p></Link>

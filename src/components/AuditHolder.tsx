@@ -1,6 +1,7 @@
 import React, { useRef, useContext } from 'react';
 import { trpc } from '@/utils/trpc';
 import { UserContext } from '@/context/user';
+import Link from 'next/link';
 
 
 interface AuditHolderProps {
@@ -9,7 +10,7 @@ interface AuditHolderProps {
     title: string;
     qmsref: string;
     active?: boolean;
-    rev?: string;
+    rev?: string | null;
 
 }[];
 
@@ -74,7 +75,8 @@ const AuditHolder: React.FC<AuditHolderProps> = ({ auditList }) => {
     
 
     return (
-        <div>
+        <div className='relative'>
+            <h2 className='m-auto text-center bg-slate-500 col-span-1 my-1'>Audit Listing</h2>
             {auditList.map(({ id, title, qmsref, active, rev }) => (
                 <div  className=' grid grid-cols-2 mx-2 border-black border-solid border-2 rounded-md my-8' key={id}>
                     <p className='mx-2 row-start-1'>Audit ID: {id}</p>
@@ -97,6 +99,12 @@ const AuditHolder: React.FC<AuditHolderProps> = ({ auditList }) => {
                     <p>No audits found</p>
                 </div>
             )}
+            {/* <button id="addaudititem" className="absolute text-sm left-0 top-0 bg-slate-200 mt-1 ml-1.5 rounded-xl border-green-500 border-solid border-2 px-1 min-w-[120px]">Add Audit</button> */}
+            <Link id="addaudititem" href='/addaudit' className='row-start-1 grid-cols-2'>
+            <button  className="absolute text-sm left-0 top-0 bg-slate-200 mt-1 ml-1.5 rounded-xl border-green-500 border-solid border-2 px-1 min-w-[120px]">
+              Add Audit
+            </button>
+          </Link>
         </div>
     );
 };

@@ -14,9 +14,7 @@ const Audit: React.FC = () => {
       <Hero title="Add Audit"/>
       <div className='flex justify-center'>
       <InputForm />
-      </div>
-
-      
+      </div>      
     </Layout>
   );
 };

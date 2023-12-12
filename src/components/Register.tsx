@@ -46,7 +46,7 @@ const Register: React.FC = () => {
 
 
 	return (
-		<div className="max-w-md mx-auto p-8">
+		<div className="max-w-md mx-auto py-2 p-8">
 		<form onSubmit={handleRegistration}>
 			<div className="mb-4">
 			<label htmlFor="fName" className="block text-sm font-medium text-gray-700">
@@ -100,9 +100,9 @@ const Register: React.FC = () => {
 			</div>
 			<button
 			type="submit"
-			className="bg-blue-500 text-white p-2 rounded-md hover:bg-gray-400 border border-black"
+			className="text-sm left-0 top-0 bg-slate-200 mt-1 ml-1.5 rounded-xl border-green-500 border-solid border-2 px-1 min-w-[120px] h-16"
 			>
-			Sign up
+			Register
 			</button>
 		</form>
 		</div>
