@@ -5,7 +5,6 @@ import useCookie from '@/utils/useCookie';
 import { UserContext } from '@/context/user';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import bcrypt from 'bcryptjs';
 
 const Login: React.FC = () => {
   const {user, setUser} = useContext(UserContext);
