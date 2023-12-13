@@ -7,14 +7,14 @@ import Checklist from '@/components/Checklist';
 const ChecklistView: React.FC = () => {
 
   const { data: auditList } = trpc.findAllAudits.useQuery();
-  const { data: checklistList } = trpc.findAllChecklists.useQuery();
+  const { data: checklistList, refetch } = trpc.findAllChecklists.useQuery();
 
   return (
     <Layout>
       <Hero title="Checklists"/>
       <section>
       
-      {auditList && <Checklist auditList={auditList.map(audit => ({ ...audit, rev: audit.rev || undefined }))} checklistList={checklistList || []} />}
+      {auditList && <Checklist refetch={refetch} auditList={auditList.map(audit => ({ ...audit, rev: audit.rev || undefined }))} checklistList={checklistList || []} />}
       </section>
       
     </Layout>
