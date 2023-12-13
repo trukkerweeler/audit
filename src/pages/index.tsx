@@ -18,7 +18,7 @@ export default function Home() {
         <main className="bg-white text-black font-sans text-2xl">
             <div className="flex flex-col justify-center items-center h-screen">
                 <h1 className="text-6xl">Welcome to Audit</h1>
-                <h2 className="text-4xl">The best auditing app, if you don't have any other auditing app.</h2>
+                <h2 className="text-4xl">The best auditing app, if you don&apos;t have any other auditing app.</h2>
             </div>
         </main>
         <Footer/>
